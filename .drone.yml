@@ -20,7 +20,7 @@ platform:
 
 workspace:
   base: /go
-  path: src/github.com/c-mueller/ads
+  path: src/github.com/thibaltus/ads
 
 steps:
   - name: test
@@ -42,11 +42,11 @@ steps:
       - cd /go/src/github.com/coredns/coredns
       - git checkout $(git describe --tags --abbrev=0)
       - sed -i "s|loadbalance:loadbalance|ads:ads\\\\nloadbalance:loadbalance|g" plugin.cfg
-      - ln -s /go/src/github.com/c-mueller/ads/ /go/src/github.com/coredns/coredns/plugin/ads
+      - ln -s /go/src/github.com/thibaltus/ads/ /go/src/github.com/coredns/coredns/plugin/ads
       - make
       - ./coredns -plugins
-      - mkdir -p /go/src/github.com/c-mueller/ads/binaries
-      - mv coredns /go/src/github.com/c-mueller/ads/binaries/coredns-ads-linux-amd64
+      - mkdir -p /go/src/github.com/thibaltus/ads/binaries
+      - mv coredns /go/src/github.com/thibaltus/ads/binaries/coredns-ads-linux-amd64
   - name: build-coredns-win
     image: golang
     environment:
@@ -55,7 +55,7 @@ steps:
     commands:
       - cd /go/src/github.com/coredns/coredns
       - make
-      - mv coredns /go/src/github.com/c-mueller/ads/binaries/coredns-win-amd64.exe
+      - mv coredns /go/src/github.com/thibaltus/ads/binaries/coredns-win-amd64.exe
     when:
       event: tag
   - name: build-coredns-darwin
@@ -66,7 +66,7 @@ steps:
     commands:
       - cd /go/src/github.com/coredns/coredns
       - make
-      - mv coredns /go/src/github.com/c-mueller/ads/binaries/coredns-darwin
+      - mv coredns /go/src/github.com/thibaltus/ads/binaries/coredns-darwin
     when:
        event: tag
   - name: build-coredns-arm
@@ -77,7 +77,7 @@ steps:
     commands:
       - cd /go/src/github.com/coredns/coredns
       - make
-      - mv coredns /go/src/github.com/c-mueller/ads/binaries/coredns-ads-arm
+      - mv coredns /go/src/github.com/thibaltus/ads/binaries/coredns-ads-arm
     when:
       event: tag
   - name: build-coredns-arm64
@@ -88,7 +88,7 @@ steps:
     commands:
       - cd /go/src/github.com/coredns/coredns
       - make
-      - mv coredns /go/src/github.com/c-mueller/ads/binaries/coredns-ads-arm64
+      - mv coredns /go/src/github.com/thibaltus/ads/binaries/coredns-ads-arm64
     when:
       event: tag
   - name: compute-hashsums
@@ -97,7 +97,7 @@ steps:
       GOOS: linux
       GOARCH: arm
     commands:
-      - cd /go/src/github.com/c-mueller/ads/binaries/
+      - cd /go/src/github.com/thibaltus/ads/binaries/
       - sha512sum * | tee hashsums.txt
     when:
       event: tag

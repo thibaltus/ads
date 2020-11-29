@@ -20,7 +20,7 @@ cd $(go env GOPATH)/src/github.com/coredns/coredns
 Next update the `plugin.cfg` in the root of the coredns repository as follows
 
 ```bash
-sed -i 's|loadbalance:loadbalance|ads:github.com/c-mueller/ads\nloadbalance:loadbalance|g' plugin.cfg
+sed -i 's|loadbalance:loadbalance|ads:github.com/thibaltus/ads\nloadbalance:loadbalance|g' plugin.cfg
 ```
 
 while I would suggest having the `ads` plugin before the `cache` plugin because it will
@@ -29,7 +29,7 @@ the DNS server could degrade when having many regex rules. In that case I recomm
 plugin before the `hosts` plugin:
 
 ```bash
-sed -i 's|hosts:hosts|ads:github.com/c-mueller/ads\nhosts:hosts|g' plugin.cfg
+sed -i 's|hosts:hosts|ads:github.com/thibaltus/ads\nhosts:hosts|g' plugin.cfg
 ```
 
 Finally run `make` to build CoreDNS with the `ads` plugin
@@ -45,10 +45,10 @@ For this you have to create a symlink to the `ads` repository in the `plugins/` 
 Assuming you are in the `plugins/` directory
 
 ```
-ln -s ~/go/src/github.com/c-mueller/ads ads
+ln -s ~/go/src/github.com/thibaltus/ads ads
 ```
 
-Make sure to replace `~/go/src/github.com/c-mueller/ads` with the proper path to the `ads` repo.
+Make sure to replace `~/go/src/github.com/thibaltus/ads` with the proper path to the `ads` repo.
 
 Next we have to insert the plugin into the `plugin.cfg`. here we use the following command, instead of the one above:
 ```
@@ -65,7 +65,7 @@ To prevent version conflicts between CoreDNS and the ads plugin it is important 
 be added in the `go.mod` file on master.
 For reference the empty `go.mod` file looks like this:
 ```
-module github.com/c-mueller/ads
+module github.com/thibaltus/ads
 
 go 1.12
 ```
